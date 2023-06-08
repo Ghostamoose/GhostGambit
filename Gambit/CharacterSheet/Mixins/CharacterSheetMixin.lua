@@ -7,6 +7,7 @@ function CharacterSheetMixin:Init()
     self.backdropInfo = TRP3_BACKDROP_TOOLTIP_0_24_5555;
 
     self.isSelf = true;
+    self.profileID = nil;
 
     self:SetupBackground();
     self:SetupNameplate();
@@ -122,21 +123,21 @@ function CharacterSheetMixin:SetupStatPage()
 
     self.StatPage = f;
 
-    f.stat1 = self:GetGenericStatDisplay();
-    f.stat1:SetPoint("TOPLEFT", f, "TOPLEFT", 10, -10);
-    f.stat1.Label:SetText(L.ATTRIBUTE_CHARISMA);
+    f.CHA = self:GetGenericStatDisplay();
+    f.CHA:SetPoint("TOPLEFT", f, "TOPLEFT", 10, -10);
+    f.CHA.Label:SetText(L.ATTRIBUTE_CHARISMA);
 
-    f.stat2 = self:GetGenericStatDisplay();
-    f.stat2:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 10, 25);
-    f.stat2.Label:SetText(L.ATTRIBUTE_DEXTERITY);
+    f.DEX = self:GetGenericStatDisplay();
+    f.DEX:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 10, 25);
+    f.DEX.Label:SetText(L.ATTRIBUTE_DEXTERITY);
 
-    f.stat3 = self:GetGenericStatDisplay();
-    f.stat3:SetPoint("LEFT", f.stat1, "RIGHT", 25, 0);
-    f.stat3.Label:SetText(L.ATTRIBUTE_STRENGTH);
+    f.STR = self:GetGenericStatDisplay();
+    f.STR:SetPoint("LEFT", f.CHA, "RIGHT", 25, 0);
+    f.STR.Label:SetText(L.ATTRIBUTE_STRENGTH);
 
-    f.stat4 = self:GetGenericStatDisplay();
-    f.stat4:SetPoint("LEFT", f.stat2, "RIGHT", 25, 0);
-    f.stat4.Label:SetText(L.ATTRIBUTE_WISDOM);
+    f.WIS = self:GetGenericStatDisplay();
+    f.WIS:SetPoint("LEFT", f.DEX, "RIGHT", 25, 0);
+    f.WIS.Label:SetText(L.ATTRIBUTE_WISDOM);
 end
 
 function CharacterSheetMixin:GetGenericStatDisplay()
@@ -195,6 +196,15 @@ end
 
 -- Utility functions
 
+function CharacterSheetMixin:SetStatDisplay(attribute, stat, modifier)
+    local statDisplay = self.StatPage[attribute];
+
+    local sign = modifier >= 0 and "+" or "";
+
+    statDisplay.ModifierValue:SetText(sign .. modifier);
+    statDisplay.StatValueRing.Value:SetText(stat);
+end
+
 function CharacterSheetMixin:SetCharacterName(name)
     if not name then
         return;
@@ -224,8 +234,9 @@ function CharacterSheetMixin:SetCharacterAlignment(alignment)
         return;
     end
 
-    local alignmentString = GambitAPI.Enums.Alignments[alignment];
-    assert(alignmentString, "Invalid alignment: " .. alignment);
+    assert(GambitAPI.Enums.Alignments[alignment], "Invalid alignment: " .. alignment);
+
+    local alignmentString = GambitAPI.Enums.AlignmentStrings[alignment];
 
     local alignmentColor = GambitAPI.Enums.AlignmentColors[alignment];
     alignmentString = alignmentColor:WrapTextInColorCode(alignmentString);
@@ -248,6 +259,7 @@ function CharacterSheetMixin:Update()
 end
 
 function CharacterSheetMixin:UpdateSelf()
+    -- TRP3 fields
     local TRP3_Player = AddOn_TotalRP3.Player.GetCurrentUser();
 
     local displayName = TRP3_Player:GetCustomColoredRoleplayingNamePrefixedWithIcon(20)
@@ -260,7 +272,20 @@ function CharacterSheetMixin:UpdateSelf()
     self:SetCharacterName(displayName);
     self:SetCharacterClass(class);
     self:SetCharacterRace(race);
-    self:SetCharacterAlignment("CE")
+
+    -- Custom fields
+    local profile;
+    profile = GambitAPI.DB:GetCurrentProfile();
+
+    if not profile then
+        profile = GambitAPI.DB:CreateProfile("Lorebee");
+    end
+
+    self:SetCharacterAlignment(profile.Alignment);
+    self:SetStatDisplay("CHA", profile.Attributes.CHA, 3);
+    self:SetStatDisplay("DEX", profile.Attributes.DEX, -3);
+    self:SetStatDisplay("STR", profile.Attributes.STR, 4);
+    self:SetStatDisplay("WIS", profile.Attributes.WIS, 6);
 end
 
 function CharacterSheetMixin:UpdateOther()
