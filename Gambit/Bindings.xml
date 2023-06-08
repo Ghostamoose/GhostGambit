@@ -1,0 +1,18 @@
+<Bindings>
+	<Binding name="Gambit_TOGGLE" header="Gambit" category="ADDONS">
+		TRP3_API.navigation.switchMainFrame();
+	</Binding>
+	<Binding name="Gambit_TOOLBAR_TOGGLE" category="ADDONS">
+		if TRP3_API.toolbar then
+		TRP3_API.toolbar.switch();
+		end
+	</Binding>
+	<Binding name="Gambit_OPEN_TARGET_PROFILE" category="ADDONS">
+		if UnitExists("target") then
+		TRP3_API.slash.openProfile("target");
+		end
+	</Binding>
+	<Binding name="Gambit_TOGGLE_CHARACTER_STATUS" category="ADDONS">
+		TRP3_API.dashboard.switchStatus();
+	</Binding>
+</Bindings>

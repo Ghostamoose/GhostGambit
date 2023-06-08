@@ -1,0 +1,49 @@
+## Interface: 100100
+## Title: Gambit
+## Notes: A roleplaying toolbox for the discerning dungeon master.
+## Author: Ghost | Lorebee-MoonGuard
+## Version: 0
+## SavedVariables: GambitDB, GambitConfig, GambitPreferences
+## SavedVariablesPerCharacter: GambitPreferencesPerCharacter
+
+## RequiredDeps: totalRP3, totalRP3_Extended
+## IconTexture: Interface/AddOns/totalRP3/Resources/policegar
+
+## X-Website: https://kivatech.io
+
+Libs/LibStub/LibStub.lua
+Libs/CallbackHandler-1.0/CallbackHandler-1.0.xml
+Libs/AceAddon-3.0/AceAddon-3.0.xml
+Libs/AceLocale-3.0/AceLocale-3.0.xml
+Libs/AceConsole-3.0/AceConsole-3.0.xml
+Libs/AceEvent-3.0/AceEvent-3.0.xml
+Libs/AceSerializer-3.0/AceSerializer-3.0.xml
+Libs/TaintLess/TaintLess.xml
+Libs/Chomp/Chomp.xml
+Libs/Ellyb/Ellyb.xml
+Libs/LibChatAnims/LibChatAnims.xml
+Libs/LibCompress/lib.xml
+Libs/LibDataBroker-1.1/LibDataBroker-1.1.lua
+Libs/LibDBIcon-1.0/lib.xml
+Libs/LibDeflate/lib.xml
+Libs/LibDropDownExtension/LibDropDownExtension.lua
+Libs/LibMSP/LibMSP.xml
+Libs/LibRPMedia/lib.xml
+Libs/UTF8/lib.xml
+
+Locales/enUS.lua
+
+Init.lua
+
+Core/Global.lua
+Core/Events.lua
+Core/Enums.lua
+
+DB/DBMain.lua
+
+CharacterSheet/Mixins/CharacterSheetMixin.lua
+CharacterSheet/CharacterSheet.lua
+
+Gambit.lua
+
+Integrations/TRP3.lua

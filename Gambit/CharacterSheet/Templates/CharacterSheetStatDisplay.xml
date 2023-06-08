@@ -1,0 +1,31 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+    <Frame name="Gambit_CharacterSheetStatDisplayTemplate" virtual="true"
+        inherits="TRP3_AltHoveredFrame">
+        <Size x="35" y="35" />
+        <Frames>
+            <Frame parentKey="StatTextContainer" inherits="TRP3_TruncatedTextTemplate">
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString parentKey="StatText" inherits="GameFontNormal"
+                            justifyH="CENTER"
+                            justifyV="TOP"
+                            text="$Stat Here$">
+                            <Color b="0.1" r="1.0" g="0.75" />
+                        </FontString>
+                        <FontString parentKey="StatDescText" inherits="GameFontNormal"
+                            justifyH="LEFT"
+                            text="$Stat Label$">
+                            <Color b="0.1" r="1.0" g="0.75" />
+                            <Anchors>
+                                <Anchor point="TOP" x="0" y="0" relativePoint="BOTTOM"
+                                    relativeKey="$parent.StatText" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
+        </Frames>
+    </Frame>
+</Ui>

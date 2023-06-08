@@ -1,0 +1,6 @@
+.release/*
+.venv
+dev/*
+Gambit/Libs/*
+.vscode/
+.editorconfig
