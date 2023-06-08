@@ -15,13 +15,14 @@ function GambitAPI.CharacterSheet:Initialize()
 	});
 end
 
-function GambitAPI.CharacterSheet:OnCharacterSheetShow(isSelf)
+function GambitAPI.CharacterSheet:OnCharacterSheetShow(isSelf, profileID)
     if isSelf then
         self:Print("OnSelfCharacterSheetShow");
         self.isSelf = true;
     else
         self:Print("OnOtherCharacterSheetShow");
         self.isSelf = false;
+        self.profileID = profileID;
     end
 
     GambitAPI.CharacterSheet:Update(); -- adjust text box sizes

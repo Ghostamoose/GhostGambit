@@ -187,7 +187,6 @@ function CharacterSheetMixin:GetGenericStatDisplay()
     f.StatValueRing.mask:SetAllPoints(f.StatValueRing);
     f.StatValueRing.mask:SetTexture("Interface/CHARACTERFRAME/TempPortraitAlphaMask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE");
 
-    --f.StatValueRing.bg:SetScale(0.75);
     f.StatValueRing.bg:AddMaskTexture(f.StatValueRing.mask);
 
     return f;

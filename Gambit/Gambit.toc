@@ -38,6 +38,8 @@ Init.lua
 Core/Global.lua
 Core/Events.lua
 Core/Enums.lua
+Core/Attributes.lua
+Core/Profile.lua
 
 DB/DBMain.lua
 

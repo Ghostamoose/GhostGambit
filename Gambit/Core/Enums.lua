@@ -28,5 +28,14 @@ GambitAPI.Enums.AlignmentColors = {
 
     LE = CreateColor(1, 1, 1, 1),
     NE = CreateColor(1, 1, 1, 1),
-    CE = CreateColor(0.6, 0, 0.8, 1),
+    CE = CreateColor(1, 1, 1, 1),
+};
+
+GambitAPI.Enums.Attributes = {
+    STR = L.ATTRIBUTE_STRENGTH,
+    DEX = L.ATTRIBUTE_DEXTERITY,
+    CON = L.ATTRIBUTE_CONSTITUTION,
+    INT = L.ATTRIBUTE_INTELLIGENCE,
+    WIS = L.ATTRIBUTE_WISDOM,
+    CHA = L.ATTRIBUTE_CHARISMA,
 };
