@@ -4,6 +4,20 @@ local L = GambitAPI.loc;
 GambitAPI.Enums = {};
 
 GambitAPI.Enums.Alignments = {
+    LG = "LG",
+    NG = "NG",
+    CG = "CG",
+
+    LN = "LN",
+    TN = "TN",
+    CN = "CN",
+
+    LE = "LE",
+    NE = "NE",
+    CE = "CE",
+};
+
+GambitAPI.Enums.AlignmentStrings = {
     LG = L.ALIGNMENT_LAWFUL_GOOD,
     NG = L.ALIGNMENT_NEUTRAL_GOOD,
     CG = L.ALIGNMENT_CHAOTIC_GOOD,

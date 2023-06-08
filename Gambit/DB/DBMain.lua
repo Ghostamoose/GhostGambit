@@ -2,24 +2,14 @@ local GambitAPI = Gambit_Addon.API;
 local nav = TRP3_API.navigation;
 local L = GambitAPI.loc;
 
-local sheets;
-
-local function GetCharacterSheet(sheetID)
-    assert(sheets[sheetID], "Sheet not found: " .. sheetID);
-    return sheets[sheetID];
-end
-
-local function DeleteCharacterSheet(sheetID)
-    assert(sheets[sheetID], "Sheet not found: " .. sheetID);
-end
+local profiles, currentProfile;
 
 local function InitDB()
-    if not GambitAPI.DB then
-        GambitAPI.DB = {};
+    if not GambitDB then
+        GambitDB = {};
     end
-    if not GambitAPI.DB.Sheets then
-        GambitAPI.DB.Sheets = {};
-    end
+
+    profiles = GambitDB;
 
     nav.menu.registerMenu({
 		id = "main_character_sheet_directory",
@@ -42,8 +32,40 @@ local function InitDB()
             nav.page.setPage("player_character_sheet"); end,
         isChildOf = "main_character_sheet_directory"
 	});
+
+    GambitAPI.DB:SelectProfile(profiles.LastSelectedProfile)
 end
 
-TRP3_API.RegisterCallback(TRP3_Addon, "WORKFLOW_ON_LOAD", function()
-    InitDB();
-end)
+TRP3_API.RegisterCallback(TRP3_Addon, "WORKFLOW_ON_LOAD", InitDB)
+
+GambitAPI.DB = {};
+
+local function isValidProfileName(profileName)
+    for name, profile in pairs(profiles) do
+        if name == profileName or name == "LastSelectedProfile" then
+            return false;
+        end
+    end
+    return true;
+end
+
+function GambitAPI.DB:GetProfiles()
+    return profiles;
+end
+
+function GambitAPI.DB:CreateProfile(profileName)
+    assert(isValidProfileName(profileName), "Profile name already exists: " .. profileName);
+    profiles[profileName] = GambitAPI.Profile:New(profileName);
+    self:SelectProfile(profileName);
+end
+
+function GambitAPI.DB:SelectProfile(profileName)
+    assert(profiles[profileName], "Profile does not exist: " .. profileName);
+    currentProfile = profiles[profileName];
+    profiles.LastSelectedProfile = profileName;
+    return currentProfile;
+end
+
+function GambitAPI.DB:GetCurrentProfile()
+    return currentProfile;
+end

@@ -1,1 +1,1 @@
-print("bongus")
+print("bingus")
