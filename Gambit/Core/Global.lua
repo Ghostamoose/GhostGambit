@@ -27,7 +27,7 @@ local function GenerateDumpPrefix(moduleName, tableTitle)
 end
 
 function GambitAPI.Print(module, ...)
-    if not ...  or not GhostConfig then
+    if not ...  or not GambitPreferences then
         return;
     end
 
