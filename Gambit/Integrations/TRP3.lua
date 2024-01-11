@@ -1,25 +1,53 @@
 local GambitAPI = Gambit_Addon.API;
 local L = GambitAPI.loc;
 
+local nav = TRP3_API.navigation;
+
+local Print = function(...) GambitAPI.Print("TRP3_Module", ...); end;
+
 GambitAPI.TRP3_Module = {};
 
-function GambitAPI.TRP3_Module:Print(...)
-    GambitAPI.Print("TRP3_Module", ...);
-end
-
 function GambitAPI.TRP3_Module:OnModuleInitialize()
-    self:Print("OnModuleInitialize");
-    GambitAPI.CharacterSheet:Initialize();
-	TRP3_API.RegisterCallback(GambitAPI, "CHARACTER_SHEET_LOADED", function()
-		self:Print("CHARACTER_SHEET_LOADED"); end)
+    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.TRP3_MODULE_INITIALIZED);
 end
 
 function GambitAPI.TRP3_Module:OnModuleEnable()
-    self:Print("OnModuleEnable");
+	GambitAPI.CharacterSheetFrame = GambitAPI.Utils.Factory.CreateCharacterSheetFrame();
+
+	    -- register page with TRP3
+	nav.page.registerPage({
+		id = "player_character_sheet",
+		frame = GambitAPI.CharacterSheetFrame,
+		onPagePreShow = function(...) GambitAPI.CharacterSheetFrame:OnShow(...); end
+	});
+
+	nav.menu.registerMenu({
+		id = "main_character_sheet_directory",
+		text = L.CHARACTER_SHEET_DIRECTORY_TOOLTIP,
+		onSelected = function() nav.menu.selectMenu("main_self_character_sheets") end,
+	});
+
+	nav.menu.registerMenu({
+		id = "main_self_character_sheets",
+		text = L.CHARACTER_SHEET_SELF_SHEETS_TOOLTIP,
+		onSelected = function()
+			nav.page.setPage("player_character_sheet"); end,
+		isChildOf = "main_character_sheet_directory"
+	});
+
+	nav.menu.registerMenu({
+		id = "main_stored_character_sheet_directory",
+		text = L.CHARACTER_SHEET_STORED_SHEETS_TOOLTIP,
+		onSelected = function()
+			nav.page.setPage("player_character_sheet"); end,
+		isChildOf = "main_character_sheet_directory"
+	});
+
+	GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.TRP3_MODULE_ENABLED);
 end
 
 function GambitAPI.TRP3_Module:OnModuleDisable()
-    self:Print("OnModuleDisable");
+    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.TRP3_MODULE_DISABLED);
 end
 
 --

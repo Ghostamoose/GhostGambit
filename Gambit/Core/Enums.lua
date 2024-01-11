@@ -3,34 +3,20 @@ local L = GambitAPI.loc;
 
 GambitAPI.Enums = {};
 
+---@enum Alignments
 GambitAPI.Enums.Alignments = {
     LG = "LG",
     NG = "NG",
     CG = "CG",
-
     LN = "LN",
     TN = "TN",
     CN = "CN",
-
     LE = "LE",
     NE = "NE",
     CE = "CE",
 };
 
-GambitAPI.Enums.AlignmentStrings = {
-    LG = L.ALIGNMENT_LAWFUL_GOOD,
-    NG = L.ALIGNMENT_NEUTRAL_GOOD,
-    CG = L.ALIGNMENT_CHAOTIC_GOOD,
-
-    LN = L.ALIGNMENT_LAWFUL_NEUTRAL,
-    TN = L.ALIGNMENT_TRUE_NEUTRAL,
-    CN = L.ALIGNMENT_CHAOTIC_NEUTRAL,
-
-    LE = L.ALIGNMENT_LAWFUL_EVIL,
-    NE = L.ALIGNMENT_NEUTRAL_EVIL,
-    CE = L.ALIGNMENT_CHAOTIC_EVIL,
-};
-
+---@enum AlignmentColors
 GambitAPI.Enums.AlignmentColors = {
     LG = CreateColor(1, 1, 1, 1),
     NG = CreateColor(1, 1, 1, 1),
@@ -45,11 +31,34 @@ GambitAPI.Enums.AlignmentColors = {
     CE = CreateColor(1, 1, 1, 1),
 };
 
+---@enum Attributes
 GambitAPI.Enums.Attributes = {
-    STR = L.ATTRIBUTE_STRENGTH,
-    DEX = L.ATTRIBUTE_DEXTERITY,
-    CON = L.ATTRIBUTE_CONSTITUTION,
-    INT = L.ATTRIBUTE_INTELLIGENCE,
-    WIS = L.ATTRIBUTE_WISDOM,
-    CHA = L.ATTRIBUTE_CHARISMA,
+    STR = "STR",
+    DEX = "DEX",
+    CON = "CON",
+    INT = "INT",
+    WIS = "WIS",
+    CHR = "CHR",
+};
+
+---@enum Skills
+GambitAPI.Enums.Skills = {
+    ACROBATICS = 1,
+    ANIMAL_HANDLING = 2,
+    ARCANA = 3,
+    ATHLETICS = 4,
+    DECEPTION = 5,
+    HISTORY = 6,
+    INSIGHT = 7,
+    INTIMIDATION = 8,
+    INVESTIGATION = 9,
+    MEDICINE = 10,
+    NATURE = 11,
+    PERCEPTION = 12,
+    PERFORMANCE = 13,
+    PERSUASION = 14,
+    RELIGION = 15,
+    SLEIGHT_OF_HAND = 16,
+    STEALTH = 17,
+    SURVIVAL = 18,
 };

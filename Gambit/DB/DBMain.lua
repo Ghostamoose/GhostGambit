@@ -1,71 +1,131 @@
 local GambitAPI = Gambit_Addon.API;
-local nav = TRP3_API.navigation;
 local L = GambitAPI.loc;
 
-local profiles, currentProfile;
+local localCharacterSheets, remoteCharacterSheets, currentCharacterSheetID, defaultCharacterSheet, characterLinks;
+
+local function JoinedUnitName(unitToken)
+    local name, realm = UnitFullName(unitToken);
+    return name .. "-" .. realm;
+end
 
 local function InitDB()
     if not GambitDB then
         GambitDB = {};
     end
 
-    profiles = GambitDB;
+    if not GambitDB.Local then
+        GambitDB.Local = {};
+    end
 
-    nav.menu.registerMenu({
-		id = "main_character_sheet_directory",
-		text = L.CHARACTER_SHEET_DIRECTORY_TOOLTIP,
-		onSelected = function() nav.menu.selectMenu("main_self_character_sheets") end,
-	});
+    if not GambitDB.Remote then
+        GambitDB.Remote = {};
+    end
 
-    nav.menu.registerMenu({
-		id = "main_self_character_sheets",
-        text = L.CHARACTER_SHEET_SELF_SHEETS_TOOLTIP,
-		onSelected = function()
-            nav.page.setPage("player_character_sheet"); end,
-        isChildOf = "main_character_sheet_directory"
-	});
+    if not GambitDB.Characters then
+        GambitDB.Characters = {};
+    end
 
-    nav.menu.registerMenu({
-		id = "main_stored_character_sheet_directory",
-        text = L.CHARACTER_SHEET_STORED_SHEETS_TOOLTIP,
-		onSelected = function()
-            nav.page.setPage("player_character_sheet"); end,
-        isChildOf = "main_character_sheet_directory"
-	});
+    localCharacterSheets = GambitDB.Local;
+    remoteCharacterSheets = GambitDB.Remote;
 
-    GambitAPI.DB:SelectProfile(profiles.LastSelectedProfile)
+    defaultCharacterSheet = CreateAndInitFromMixin(GambitAPI.Mixins.CharacterSheetMixin, L.DEFAULT_SHEET_ID);
+    characterLinks = GambitDB.Characters;
+
+    local playerName = JoinedUnitName("player");
+    local links = GambitAPI.DB:GetLinksForPlayer(playerName);
+    currentCharacterSheetID = links and links.sheetID or L.DEFAULT_SHEET_ID;
+
+    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.DB_INITIALIZED);
 end
 
-TRP3_API.RegisterCallback(TRP3_Addon, "WORKFLOW_ON_LOAD", InitDB)
+GambitAPI.EventHandler:RegisterCallback(GambitAPI.Events.TRP3_MODULE_ENABLED, InitDB);
 
 GambitAPI.DB = {};
 
-local function isValidProfileName(profileName)
-    for name, profile in pairs(profiles) do
-        if name == profileName or name == "LastSelectedProfile" then
-            return false;
-        end
+function GambitAPI.DB:DoesLocalCharacterSheetExist(sheetID)
+    return localCharacterSheets[sheetID] ~= nil
+end
+
+function GambitAPI.DB:DoesRemoteCharacterSheetExist(sheetID)
+    return remoteCharacterSheets[sheetID] ~= nil
+end
+
+function GambitAPI.DB:CreateCharacterSheet(sheetName)
+    local uniqueID = GambitAPI.CharacterSheetUtils.GenerateID();
+    assert(not self:DoesLocalCharacterSheetExist(uniqueID), "UniqueID conflict");
+
+    local newCharacterSheet = CreateAndInitFromMixin(GambitAPI.Mixins.CharacterSheetMixin, sheetName);
+    localCharacterSheets[uniqueID] = newCharacterSheet;
+
+    self:SelectLocalCharacterSheet(uniqueID);
+    return uniqueID;
+end
+
+function GambitAPI.DB:GetCharacterSheet(sheetID)
+    if sheetID == L.DEFAULT_SHEET_ID then
+        return defaultCharacterSheet;
     end
+
+    return localCharacterSheets[sheetID] or remoteCharacterSheets[sheetID];
+end
+
+function GambitAPI.DB:GetLinksForPlayer(playerName)
+    return characterLinks[playerName] or {};
+end
+
+function GambitAPI.DB:GetDefaultCharacterSheet()
+    return defaultCharacterSheet;
+end
+
+function GambitAPI.DB:GetCurrentCharacterSheet()
+    return self:GetCharacterSheet(currentCharacterSheetID);
+end
+
+function GambitAPI.DB:GetCurrentCharacterSheetID()
+    return currentCharacterSheetID or L.DEFAULT_SHEET_ID;
+end
+
+function GambitAPI.DB:OverwriteCharacterSheet(sheetID, newSheet)
+    local oldSheet = self:GetCharacterSheet(sheetID);
+
+    if oldSheet then
+        newSheet.Revision = oldSheet.Revision + 1;
+    end
+
+    -- should probably do some recycling to prevent accidental deletions
+
+    localCharacterSheets[sheetID] = newSheet;
+    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.CHARACTER_SHEET_UPDATED, sheetID);
+end
+
+function GambitAPI.DB:SelectLocalCharacterSheet(sheetID)
+    if sheetID then
+        assert(self:DoesLocalCharacterSheetExist(sheetID), "Local character sheet with ID " .. sheetID .. " does not exist");
+        currentCharacterSheetID = sheetID;
+    else
+        currentCharacterSheetID = L.DEFAULT_SHEET_ID;
+    end
+
+    self:UpdateLinkForUnit("player", currentCharacterSheetID);
+
+    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.CHARACTER_SHEET_CHANGED, currentCharacterSheetID);
+
+    return currentCharacterSheetID;
+end
+
+function GambitAPI.DB:UpdateLinkForUnit(unitToken, sheetID)
+    local playerName = JoinedUnitName(unitToken);
+
+    if not characterLinks[playerName] then
+        characterLinks[playerName] = {};
+    end
+
+    characterLinks[playerName].sheetID = sheetID;
+end
+
+function GambitAPI.DB:DeleteLocalCharacterSheet(sheetID)
+    assert(self:DoesLocalCharacterSheetExist(sheetID), "Character sheet does not exist: " .. sheetID);
+    assert(sheetID ~= currentCharacterSheetID, "Attempt to delete currently selected character sheet");
+    localCharacterSheets[sheetID] = nil;
     return true;
-end
-
-function GambitAPI.DB:GetProfiles()
-    return profiles;
-end
-
-function GambitAPI.DB:CreateProfile(profileName)
-    assert(isValidProfileName(profileName), "Profile name already exists: " .. profileName);
-    profiles[profileName] = GambitAPI.Profile:New(profileName);
-    self:SelectProfile(profileName);
-end
-
-function GambitAPI.DB:SelectProfile(profileName)
-    assert(profiles[profileName], "Profile does not exist: " .. profileName);
-    currentProfile = profiles[profileName];
-    profiles.LastSelectedProfile = profileName;
-    return currentProfile;
-end
-
-function GambitAPI.DB:GetCurrentProfile()
-    return currentProfile;
 end

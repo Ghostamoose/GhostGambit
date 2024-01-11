@@ -1,0 +1,110 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+    <Frame name="GambitPHFrame" virtual="true" enableMouse="true">
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString parentKey="PHText" font="ChatFontNormal">
+                    <Anchors>
+                        <Anchor point="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture setAllPoints="true">
+                    <Color r="0.85" g="0.85" b="0.85" a="0.25" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                self.PHText:SetText(self:GetParentKey());
+            </OnLoad>
+            <OnEnter>
+                GameTooltip:SetOwner(self, "ANCHOR_TOP");
+                GameTooltip:SetText(self:GetParentKey());
+                GameTooltip:Show();
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+        </Scripts>
+    </Frame>
+
+    <Frame name="GambitCharacterSheetTemplate" virtual="true"
+        inherits="PortraitFrameFlatTemplate" mixin="GambitCharacterFrameMixin">
+        <Size x="800" y="900" />
+        <Frames>
+            <Frame parentKey="Header" inherits="GambitCharacterSheetHeaderTemplate">
+                <Size y="125" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Bg" x="10" y="-13" />
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.Bg" x="-10" y="-13" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Attributes" inherits="GambitCharacterSheetAttributesTemplate">
+                <Size x="135" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Header" relativePoint="BOTTOMLEFT"
+                        y="-8" />
+                    <Anchor point="BOTTOMLEFT" y="13" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Skills" inherits="GambitCharacterSheetSkillsTemplate">
+                <Size x="215" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Attributes"
+                        relativePoint="TOPRIGHT"
+                        x="8" />
+                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.Attributes"
+                        relativePoint="RIGHT" x="8" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Features" inherits="GambitPHFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Skills"
+                        relativePoint="BOTTOMLEFT"
+                        y="-8" />
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.Skills"
+                        relativePoint="BOTTOMRIGHT"
+                        y="-8" />
+                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.Attributes"
+                        relativePoint="BOTTOMRIGHT" x="8" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Health" inherits="GambitPHFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Skills"
+                        relativePoint="TOPRIGHT"
+                        x="8" />
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.Header"
+                        relativePoint="BOTTOMRIGHT"
+                        y="-8" />
+                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.Skills" x="8" y="-100" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="???" inherits="GambitPHFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Health"
+                        relativePoint="BOTTOMLEFT"
+                        y="-8" />
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.Health"
+                        relativePoint="BOTTOMRIGHT"
+                        y="-8" />
+                    <Anchor point="BOTTOMLEFT" relativeKey="$parent.Features"
+                        relativePoint="BOTTOMRIGHT" x="8" />
+                </Anchors>
+            </Frame>
+        </Frames>
+
+        <Scripts>
+            <OnLoad method="OnLoad" inherit="prepend" />
+        </Scripts>
+    </Frame>
+
+    <Frame name="GambitFrame" parent="UIParent" inherits="GambitCharacterSheetTemplate"
+        toplevel="true" enableMouse="true">
+        <Anchors>
+            <Anchor point="CENTER" y="50" />
+        </Anchors>
+    </Frame>
+</Ui>

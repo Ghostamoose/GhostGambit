@@ -1,0 +1,120 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+    <Frame name="GambitCharacterSheetAttributeDisplayTemplate" virtual="true"
+        mixin="GambitCharacterSheetAttributeDisplayMixin">
+        <Size x="105" y="100" />
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="Background" atlas="QuestBG-Parchment-Accessibility">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="7" y="-7" />
+                        <Anchor point="BOTTOMRIGHT" x="-7" y="7" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Label" font="GameFontBlack" justifyH="CENTER" text="Strength">
+                    <Size y="15" />
+                    <Anchors>
+                        <Anchor point="TOP" relativeKey="$parent.Background" y="-8" />
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="AttributeValue" font="GameFontBlack" justifyH="CENTER"
+                    text="10">
+                    <Anchors>
+                        <Anchor point="CENTER" relativeKey="$parent.Background" />
+                    </Anchors>
+                </FontString>
+                <Texture parentKey="ModifierBorder"
+                    atlas="dragonflight-landingbutton-circlehighlight">
+                    <Size x="52" y="52" />
+                    <Anchors>
+                        <Anchor point="CENTER" relativeKey="$parent.Background"
+                            relativePoint="BOTTOM" y="-4" />
+                    </Anchors>
+                </Texture>
+                <FontString parentKey="ModifierValue" font="GameFontWhite" justifyH="CENTER"
+                    text="+3">
+                    <Anchors>
+                        <Anchor point="CENTER" relativeKey="$parent.ModifierBorder" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="ARTWORK" textureSubLevel="-1">
+                <Texture parentKey="ModifierBackground"
+                    atlas="GarrMissionLocation-Maw-follower-socket-03">
+                    <Size x="45" y="45" />
+                    <Anchors>
+                        <Anchor point="CENTER" relativeKey="$parent.ModifierBorder" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="NineSlice"
+                inherits="NineSlicePanelTemplate">
+                <KeyValues>
+                    <KeyValue key="layoutType" value="GambitMawBorder" />
+                </KeyValues>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+    </Frame>
+
+    <Frame name="GambitCharacterSheetAttributesTemplate" virtual="true"
+        mixin="GambitCharacterSheetAttributesMixin">
+        <Frames>
+            <Frame parentKey="Strength" inherits="GambitCharacterSheetAttributeDisplayTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="15" />
+                    <Anchor point="TOPRIGHT" x="-15" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Dexterity" inherits="GambitCharacterSheetAttributeDisplayTemplate">
+                <Anchors>
+                    <Anchor point="TOP" relativeKey="$parent.Strength" relativePoint="BOTTOM"
+                        y="-20" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Constitution" inherits="GambitCharacterSheetAttributeDisplayTemplate">
+                <Anchors>
+                    <Anchor point="TOP" relativeKey="$parent.Dexterity" relativePoint="BOTTOM"
+                        y="-20" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Intelligence" inherits="GambitCharacterSheetAttributeDisplayTemplate">
+                <Anchors>
+                    <Anchor point="TOP" relativeKey="$parent.Constitution" relativePoint="BOTTOM"
+                        y="-20" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Wisdom" inherits="GambitCharacterSheetAttributeDisplayTemplate">
+                <Anchors>
+                    <Anchor point="TOP" relativeKey="$parent.Intelligence" relativePoint="BOTTOM"
+                        y="-20" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Charisma" inherits="GambitCharacterSheetAttributeDisplayTemplate">
+                <Anchors>
+                    <Anchor point="TOP" relativeKey="$parent.Wisdom" relativePoint="BOTTOM" y="-20" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="NineSlice"
+                inherits="NineSlicePanelTemplate">
+                <KeyValues>
+                    <KeyValue key="layoutType" value="GambitThinGrayBorder" />
+                </KeyValues>
+            </Frame>
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture atlas="auctionhouse-background-buy-commodities-market" />
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+    </Frame>
+</Ui>

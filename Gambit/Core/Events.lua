@@ -1,18 +1,22 @@
 local GambitAPI = Gambit_Addon.API;
 
 GambitAPI.Events = {
-    CHARACTER_SHEET_UPDATED = "CHARACTER_SHEET_UPDATED",
-    CHARACTER_SHEET_LOADED = "CHARACTER_SHEET_LOADED",
-    CHARACTER_SHEET_DELETED = "CHARACTER_SHEET_DELETED",
-    CHARACTER_SHEET_OPENED = "CHARACTER_SHEET_OPENED",
+    CHARACTER_SHEET_FRAME_CREATED = "Gambit.CharacterSheetFrameCreated",
+    CHARACTER_SHEET_UPDATED = "Gambit.CharacterSheetUpdated",
+    CHARACTER_SHEET_LOADED = "Gambit.CharacterSheetLoaded",
+    CHARACTER_SHEET_DELETED = "Gambit.CharacterSheetDeleted",
+    CHARACTER_SHEET_OPENED = "Gambit.CharacterSheetOpened",
+    CHARACTER_SHEET_CHANGED = "Gambit.CharacterSheetChanged",
+    CHARACTER_SHEET_EDIT_STATE_CHANGED = "Gambit.CharacterSheetEditStateChanged",
 
-    DICE_ROLL_REQUESTED = "DICE_ROLL_REQUESTED",
-    DICE_ROLL_RESULT = "DICE_ROLL_RESULT",
-}
+    DICE_ROLL_REQUESTED = "Gambit.DiceRollRequested",
+    DICE_ROLL_RESULT = "Gambit.DiceRollResult",
 
-GambitAPI.callbacks = TRP3_API.InitCallbackRegistryWithEvents(GambitAPI, GambitAPI.Events);
+    DB_INITIALIZED = "Gambit.DatabaseInitialized",
 
-function GambitAPI:TriggerEvent(event, ...)
-    assert(self.Events[event], "attempted to trigger an invalid addon event");
-	self.callbacks:Fire(event, ...);
-end
+    TRP3_MODULE_INITIALIZED = "Gambit.TRP3ModuleInitialized",
+    TRP3_MODULE_ENABLED = "Gambit.TRP3ModuleEnabled",
+    TRP3_MODULE_DISABLED = "Gambit.TRP3ModuleDisabled",
+};
+
+GambitAPI.EventHandler = EventRegistry;

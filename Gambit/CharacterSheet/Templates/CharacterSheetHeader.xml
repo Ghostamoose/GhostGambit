@@ -1,0 +1,124 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+    <Frame name="GambitCharacterSheetHeaderInfoEntryTemplate" virtual="true">
+        <Size x="175" y="45" />
+        <Frames>
+            <Frame parentKey="EditableText"
+                inherits="GambitCharacterSheetEditableFontStringTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" />
+                    <Anchor point="BOTTOMRIGHT" y="30" />
+                </Anchors>
+            </Frame>
+        </Frames>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="Separator"
+                    atlas="header-horizontal-rule">
+                    <Size y="4" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT"
+                            relativeKey="$parent.EditableText" x="-3" y="-2" />
+                        <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT"
+                            relativeKey="$parent.EditableText" x="-6" y="-2" />
+                    </Anchors>
+                </Texture>
+                <FontString parentKey="Label" font="ChatFontNormal" justifyH="LEFT" text="LABEL">
+                    <Size y="15" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeKey="$parent.Separator"
+                            relativePoint="BOTTOMLEFT" x="4" />
+                        <Anchor point="TOPRIGHT" relativeKey="$parent.Separator"
+                            relativePoint="BOTTOMRIGHT" x="-4" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="GambitCharacterSheetHeaderTemplate" virtual="true"
+        mixin="GambitCharacterSheetHeaderMixin">
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="TitleTextureLeft" atlas="UI-Frame-Dragonflight-TitleLeft">
+                    <Size x="202" y="85" />
+                    <Anchors>
+                        <Anchor point="LEFT" />
+                    </Anchors>
+                </Texture>
+                <Texture
+                    parentKey="TitleTextureRight" atlas="UI-Frame-Dragonflight-TitleRight">
+                    <Size x="202" y="85" />
+                    <Anchors>
+                        <Anchor point="LEFT" relativeKey="$parent.TitleTextureLeft"
+                            relativePoint="RIGHT" />
+                    </Anchors>
+                </Texture>
+                <Texture
+                    parentKey="TitleTextureBottom" atlas="Dragonflight-GoldDetailTop">
+                    <Size x="90" y="28" />
+                    <Anchors>
+                        <Anchor point="CENTER" relativeKey="$parent.TitleTextureLeft"
+                            relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                </Texture>
+                <Texture
+                    parentKey="TitleTextureRibbon"
+                    atlas="UI-Frame-CypherChoice-CountdownShadow">
+                    <Size x="347" y="125" />
+                    <Anchors>
+                        <Anchor point="CENTER" relativeKey="$parent.TitleTextureLeft"
+                            relativePoint="RIGHT" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture atlas="auctionhouse-background-buy-commodities-market" />
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="ProfileName"
+                inherits="GambitCharacterSheetEditableFontStringTemplate">
+                <Size x="200" y="85" />
+                <Anchors>
+                    <Anchor point="LEFT" relativeKey="$parent.TitleTextureLeft" x="50" />
+                    <Anchor point="RIGHT" relativeKey="$parent.TitleTextureRight" x="-50" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="ClassLevel" inherits="GambitCharacterSheetHeaderInfoEntryTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.TitleTextureRight"
+                        relativePoint="TOPRIGHT" x="5" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Alignment" inherits="GambitCharacterSheetHeaderInfoEntryTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.ClassLevel"
+                        relativePoint="TOPRIGHT" x="5" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="Race" inherits="GambitCharacterSheetHeaderInfoEntryTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.ClassLevel"
+                        relativePoint="BOTTOMLEFT" y="-5" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="LinkedCharacter"
+                inherits="GambitCharacterSheetHeaderInfoEntryTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.Race"
+                        relativePoint="TOPRIGHT" x="5" />
+                </Anchors>
+            </Frame>
+            <Frame parentKey="NineSlice"
+                inherits="NineSlicePanelTemplate">
+                <KeyValues>
+                    <KeyValue key="layoutType" value="GambitThinGrayBorder" />
+                </KeyValues>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+    </Frame>
+</Ui>

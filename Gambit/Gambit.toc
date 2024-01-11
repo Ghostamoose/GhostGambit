@@ -1,9 +1,9 @@
-## Interface: 100100
+## Interface: 100200
 ## Title: Gambit
-## Notes: A roleplaying toolbox for the discerning dungeon master.
-## Author: Ghost | Lorebee-MoonGuard
-## Version: 0
-## SavedVariables: GambitDB, GambitConfig, GambitPreferences
+## Notes: A roleplaying toolbox for the discerning roleplay extraordinaire.
+## Author: Ghost
+## Version: 1
+## SavedVariables: GambitDB, GambitPreferences
 ## SavedVariablesPerCharacter: GambitPreferencesPerCharacter
 
 ## RequiredDeps: totalRP3, totalRP3_Extended
@@ -19,7 +19,6 @@ Libs/AceConsole-3.0/AceConsole-3.0.xml
 Libs/AceEvent-3.0/AceEvent-3.0.xml
 Libs/AceSerializer-3.0/AceSerializer-3.0.xml
 Libs/TaintLess/TaintLess.xml
-Libs/Chomp/Chomp.xml
 Libs/Ellyb/Ellyb.xml
 Libs/LibChatAnims/LibChatAnims.xml
 Libs/LibCompress/lib.xml
@@ -36,16 +35,21 @@ Locales/enUS.lua
 Init.lua
 
 Core/Global.lua
+Core/Utils.lua
 Core/Events.lua
 Core/Enums.lua
-Core/Attributes.lua
-Core/Profile.lua
 
 DB/DBMain.lua
 
-CharacterSheet/Mixins/CharacterSheetMixin.lua
-CharacterSheet/CharacterSheet.lua
+CharacterSheet/CharacterSheetNineSliceLayouts.lua
+CharacterSheet/CharacterSheetFrame.lua
+CharacterSheet/CharacterSheetElements.lua
+CharacterSheet/Templates/CharacterSheetElements.xml
+CharacterSheet/Templates/CharacterSheetHeader.xml
+CharacterSheet/Templates/CharacterSheetSkills.xml
+CharacterSheet/Templates/CharacterSheetAttributes.xml
+CharacterSheet/Templates/CharacterSheetFrame.xml
 
 Gambit.lua
 
-Integrations/TRP3.lua
+#Integrations/TRP3.lua
