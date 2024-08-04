@@ -1,0 +1,85 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+    <Frame name="GambitCharacterSheetHealthTemplate" virtual="true"
+        mixin="GambitCharacterSheetHealthMixin">
+        <Frames>
+            <Frame parentKey="ArmorClass">
+                <Size x="163" y="210" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="15" y="-15" />
+                </Anchors>
+
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="Border" atlas="Soulbinds_Portrait_Border"
+                            setAllPoints="true" />
+                        <FontString parentKey="ArmorClassValue" font="GameFontWhite"
+                            justifyH="CENTER"
+                            text="10">
+                            <Anchors>
+                                <Anchor point="BOTTOM" relativePoint="BOTTOM" y="35" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="ARTWORK" textureSubLevel="-1">
+                        <Texture parentKey="Highlight" atlas="Soulbinds_Portrait_Highlight"
+                            setAllPoints="true" />
+                    </Layer>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="Background" atlas="Soulbinds_Portrait_Background">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="6" y="-6" />
+                                <Anchor point="BOTTOMRIGHT" x="-6" y="6" />
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+            </Frame>
+
+            <Cooldown parentKey="HealthBar" reverse="true" hideCountdownNumbers="true"
+                rotation="180" useParentLevel="true"
+                mixin="GambitCharacterSheetHealthBarMixin">
+                <Size x="120" y="120" />
+                <Anchors>
+                    <Anchor point="BOTTOM" y="50" />
+                </Anchors>
+            </Cooldown>
+
+            <Frame parentKey="NineSlice"
+                inherits="NineSlicePanelTemplate">
+                <KeyValues>
+                    <KeyValue key="layoutType" value="GambitThinGrayBorder" />
+                </KeyValues>
+            </Frame>
+        </Frames>
+        <Layers>
+            <Layer level="OVERLAY">
+                <Texture parentKey="CenterShadow" atlas="SpecDial_Center_Shadow" useAtlasSize="true">
+                    <Anchors>
+                        <Anchor point="CENTER" relativeKey="$parent.HealthBar" />
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="DialBorder" atlas="SpecDial_Outer_TitanLineRing">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeKey="$parent.HealthBar" x="-5" y="5" />
+                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.HealthBar" x="5" y="-5" />
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="CenterBorder"
+                    atlas="dragonflight-landingbutton-circlehighlight">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeKey="$parent.CenterShadow" x="5" y="-5" />
+                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.CenterShadow" x="-5" y="5" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture atlas="Professions-Specializations-Background-Dial" />
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+            <OnUpdate method="OnUpdate" />
+        </Scripts>
+    </Frame>
+</Ui>

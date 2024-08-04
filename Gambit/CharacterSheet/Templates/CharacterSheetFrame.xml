@@ -59,7 +59,7 @@
                         relativePoint="RIGHT" x="8" />
                 </Anchors>
             </Frame>
-            <Frame parentKey="Features" inherits="GambitPHFrame">
+            <Frame parentKey="Features" inherits="GambitCharacterSheetFeaturesTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeKey="$parent.Skills"
                         relativePoint="BOTTOMLEFT"
@@ -71,7 +71,7 @@
                         relativePoint="BOTTOMRIGHT" x="8" />
                 </Anchors>
             </Frame>
-            <Frame parentKey="Health" inherits="GambitPHFrame">
+            <Frame parentKey="Health" inherits="GambitCharacterSheetHealthTemplate">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeKey="$parent.Skills"
                         relativePoint="TOPRIGHT"

@@ -1,48 +1,51 @@
 local GambitAPI = Gambit_Addon.API;
 local L = GambitAPI.loc;
 
-GambitAPI.Enums = {};
+GambitAPI.Enum = {};
 
 ---@enum Alignments
-GambitAPI.Enums.Alignments = {
-    LG = "LG",
-    NG = "NG",
-    CG = "CG",
-    LN = "LN",
-    TN = "TN",
-    CN = "CN",
-    LE = "LE",
-    NE = "NE",
-    CE = "CE",
+GambitAPI.Enum.Alignments = {
+    LG = 1,
+    NG = 2,
+    CG = 3,
+    LN = 4,
+    TN = 5,
+    CN = 6,
+    LE = 7,
+    NE = 8,
+    CE = 9,
 };
 
+---@enum AlignmentsReverse
+GambitAPI.Enum.AlignmentsReverse = tInvert(GambitAPI.Enum.Alignments);
+
 ---@enum AlignmentColors
-GambitAPI.Enums.AlignmentColors = {
-    LG = CreateColor(1, 1, 1, 1),
-    NG = CreateColor(1, 1, 1, 1),
-    CG = CreateColor(1, 1, 1, 1),
+GambitAPI.Enum.AlignmentColors = {
+    [GambitAPI.Enum.Alignments.LG] = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.NG] = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.CG] = CreateColor(1, 1, 1, 1),
 
-    LN = CreateColor(1, 1, 1, 1),
-    TN = CreateColor(1, 1, 1, 1),
-    CN = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.LN] = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.TN] = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.CN] = CreateColor(1, 1, 1, 1),
 
-    LE = CreateColor(1, 1, 1, 1),
-    NE = CreateColor(1, 1, 1, 1),
-    CE = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.LE] = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.NE] = CreateColor(1, 1, 1, 1),
+    [GambitAPI.Enum.Alignments.CE] = CreateColor(1, 1, 1, 1),
 };
 
 ---@enum Attributes
-GambitAPI.Enums.Attributes = {
-    STR = "STR",
-    DEX = "DEX",
-    CON = "CON",
-    INT = "INT",
-    WIS = "WIS",
-    CHR = "CHR",
+GambitAPI.Enum.Attributes = {
+    STR = 1,
+    DEX = 2,
+    CON = 3,
+    INT = 4,
+    WIS = 5,
+    CHR = 6,
 };
 
 ---@enum Skills
-GambitAPI.Enums.Skills = {
+GambitAPI.Enum.Skills = {
     ACROBATICS = 1,
     ANIMAL_HANDLING = 2,
     ARCANA = 3,

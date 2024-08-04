@@ -84,4 +84,8 @@ L["SKILL_SLEIGHT_OF_HAND"] = "Sleight of Hand";
 L["SKILL_STEALTH"] = "Stealth";
 L["SKILL_SURVIVAL"] = "Survival";
 
+-- FEATURES
+
+L["FEATURE_PH"] = "$Feature Name$";
+
 -- END LOCALIZATION

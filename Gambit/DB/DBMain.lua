@@ -35,10 +35,10 @@ local function InitDB()
     local links = GambitAPI.DB:GetLinksForPlayer(playerName);
     currentCharacterSheetID = links and links.sheetID or L.DEFAULT_SHEET_ID;
 
-    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.DB_INITIALIZED);
+    GambitAPI.EventRegistry:TriggerEvent(GambitAPI.Events.DB_INITIALIZED);
 end
 
-GambitAPI.EventHandler:RegisterCallback(GambitAPI.Events.TRP3_MODULE_ENABLED, InitDB);
+GambitAPI.EventRegistry:RegisterCallback(GambitAPI.Events.TRP3_MODULE_ENABLED, InitDB);
 
 GambitAPI.DB = {};
 
@@ -63,7 +63,7 @@ end
 
 function GambitAPI.DB:GetCharacterSheet(sheetID)
     if sheetID == L.DEFAULT_SHEET_ID then
-        return defaultCharacterSheet;
+        return GambitDB.Default;
     end
 
     return localCharacterSheets[sheetID] or remoteCharacterSheets[sheetID];
@@ -95,7 +95,17 @@ function GambitAPI.DB:OverwriteCharacterSheet(sheetID, newSheet)
     -- should probably do some recycling to prevent accidental deletions
 
     localCharacterSheets[sheetID] = newSheet;
-    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.CHARACTER_SHEET_UPDATED, sheetID);
+    GambitAPI.EventRegistry:TriggerEvent(GambitAPI.Events.CHARACTER_SHEET_UPDATED, sheetID);
+end
+
+function GambitAPI.DB:SaveCharacterSheet(newSheet)
+    local sheetID = newSheet.ID;
+    newSheet.Revision = newSheet.Revision + 1;
+
+    -- should probably do some recycling to prevent accidental deletions
+
+    localCharacterSheets[sheetID] = newSheet;
+    GambitAPI.EventRegistry:TriggerEvent(GambitAPI.Events.CHARACTER_SHEET_UPDATED, sheetID);
 end
 
 function GambitAPI.DB:SelectLocalCharacterSheet(sheetID)
@@ -108,7 +118,7 @@ function GambitAPI.DB:SelectLocalCharacterSheet(sheetID)
 
     self:UpdateLinkForUnit("player", currentCharacterSheetID);
 
-    GambitAPI.EventHandler:TriggerEvent(GambitAPI.Events.CHARACTER_SHEET_CHANGED, currentCharacterSheetID);
+    GambitAPI.EventRegistry:TriggerEvent(GambitAPI.Events.CHARACTER_SHEET_CHANGED, currentCharacterSheetID);
 
     return currentCharacterSheetID;
 end

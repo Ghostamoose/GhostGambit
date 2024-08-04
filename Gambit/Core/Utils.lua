@@ -1,5 +1,5 @@
 local GambitAPI = Gambit_Addon.API;
-
+local Enum = GambitAPI.Enum;
 local Utils = GambitAPI.Utils;
 
 -- stolen from TRP3
@@ -15,7 +15,7 @@ for i=97, 122 do
 end
 local sID_CHARS = #ID_CHARS;
 
-function Utils.GenerateID()
+function Utils.GenerateUniqueID()
     local id = date("%m%d%H%M%S");
 	for _=1, 5 do
 		id = id .. ID_CHARS[math.random(1, sID_CHARS)];
@@ -24,12 +24,35 @@ function Utils.GenerateID()
 end
 
 function Utils.GetAlignmentColor(alignment)
-	local color = GambitAPI.Enums.AlignmentColors[alignment];
+	return Enum.AlignmentColors[alignment];
+end
 
-	if not color then
-		alignment = GambitAPI.Enums.AlignmentsReverse[alignment];
-		color = GambitAPI.Enums.AlignmentColors[alignment];
+---@param unitToken? UnitId
+---@return string characterID
+function Utils.GetCharacterID(unitToken)
+	unitToken = unitToken or "player";
+
+	local name, realm = UnitFullName(unitToken);
+	if not realm then
+		realm = GetNormalizedRealmName();
 	end
 
-	return color;
+	return format("%s-%s", name, realm);
+end
+
+---@param unitToken? UnitId
+---@return string? name, string? realm
+function Utils.GetCharacterName(unitToken)
+	local characterID = Utils.GetCharacterID(unitToken);
+	local name, realm = strsplit("-", characterID, 2);
+	return name, realm;
+end
+
+---@param characterID string
+---@return string name, string realm
+function Utils.SplitCharacterID(characterID)
+	return strsplit("-", characterID, 2);
+end
+
+function Utils.UsingTRP3()
 end

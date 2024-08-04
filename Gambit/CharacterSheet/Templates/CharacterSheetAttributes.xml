@@ -19,13 +19,13 @@
                         <Anchor point="TOP" relativeKey="$parent.Background" y="-8" />
                     </Anchors>
                 </FontString>
-                <FontString parentKey="AttributeValue" font="GameFontBlack" justifyH="CENTER"
-                    text="10">
+                <FontString parentKey="ModifierValue" font="GameFontBlack" justifyH="CENTER"
+                    text="+3">
                     <Anchors>
-                        <Anchor point="CENTER" relativeKey="$parent.Background" />
+                        <Anchor point="CENTER" relativeKey="$parent.Background" y="-5" />
                     </Anchors>
                 </FontString>
-                <Texture parentKey="ModifierBorder"
+                <Texture parentKey="AttributeBorder"
                     atlas="dragonflight-landingbutton-circlehighlight">
                     <Size x="52" y="52" />
                     <Anchors>
@@ -33,19 +33,19 @@
                             relativePoint="BOTTOM" y="-4" />
                     </Anchors>
                 </Texture>
-                <FontString parentKey="ModifierValue" font="GameFontWhite" justifyH="CENTER"
-                    text="+3">
+                <FontString parentKey="AttributeValue" font="GameFontWhite" justifyH="CENTER"
+                    text="10">
                     <Anchors>
-                        <Anchor point="CENTER" relativeKey="$parent.ModifierBorder" />
+                        <Anchor point="CENTER" relativeKey="$parent.AttributeBorder" />
                     </Anchors>
                 </FontString>
             </Layer>
             <Layer level="ARTWORK" textureSubLevel="-1">
-                <Texture parentKey="ModifierBackground"
+                <Texture parentKey="AttributeBackground"
                     atlas="GarrMissionLocation-Maw-follower-socket-03">
                     <Size x="45" y="45" />
                     <Anchors>
-                        <Anchor point="CENTER" relativeKey="$parent.ModifierBorder" />
+                        <Anchor point="CENTER" relativeKey="$parent.AttributeBorder" />
                     </Anchors>
                 </Texture>
             </Layer>

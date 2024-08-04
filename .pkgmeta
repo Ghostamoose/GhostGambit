@@ -20,10 +20,9 @@ ignore:
 externals:
   Gambit/Libs/AceAddon-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceAddon-3.0
   Gambit/Libs/AceLocale-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceLocale-3.0
+  Gambit/Libs/AceDB-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceDB-3.0
   Gambit/Libs/AceConsole-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceConsole-3.0
-  Gambit/Libs/AceEvent-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceEvent-3.0
   Gambit/Libs/AceSerializer-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceSerializer-3.0
-  Gambit/Libs/CallbackHandler-1.0: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
   Gambit/Libs/LibChatAnims: https://repos.curseforge.com/wow/libchatanims/trunk/LibChatAnims
   Gambit/Libs/LibCompress: https://repos.curseforge.com/wow/libcompress/trunk
   Gambit/Libs/LibDataBroker-1.1: https://github.com/tekkub/libdatabroker-1-1

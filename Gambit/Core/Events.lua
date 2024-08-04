@@ -8,6 +8,7 @@ GambitAPI.Events = {
     CHARACTER_SHEET_OPENED = "Gambit.CharacterSheetOpened",
     CHARACTER_SHEET_CHANGED = "Gambit.CharacterSheetChanged",
     CHARACTER_SHEET_EDIT_STATE_CHANGED = "Gambit.CharacterSheetEditStateChanged",
+    CHARACTER_SHEET_ATTRIBUTE_UPDATED = "Gambit.CharacterSheetAttributeUpdated",
 
     DICE_ROLL_REQUESTED = "Gambit.DiceRollRequested",
     DICE_ROLL_RESULT = "Gambit.DiceRollResult",
@@ -19,4 +20,4 @@ GambitAPI.Events = {
     TRP3_MODULE_DISABLED = "Gambit.TRP3ModuleDisabled",
 };
 
-GambitAPI.EventHandler = EventRegistry;
+GambitAPI.EventRegistry = EventRegistry;

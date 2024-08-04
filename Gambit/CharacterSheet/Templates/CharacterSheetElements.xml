@@ -11,7 +11,7 @@
                 </Anchors>
                 <Scripts>
                     <OnEnterPressed>
-                        CallMethodOnNearestAncestor(self, "OnEscapePressed");
+                        CallMethodOnNearestAncestor(self, "OnEnterPressed");
                     </OnEnterPressed>
                 </Scripts>
             </EditBox>
@@ -26,5 +26,8 @@
                 </FontString>
             </Layer>
         </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad" inherit="prepend" />
+        </Scripts>
     </Frame>
 </Ui>

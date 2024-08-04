@@ -77,7 +77,7 @@
             </Layer>
         </Layers>
         <Frames>
-            <Frame parentKey="ProfileName"
+            <Frame parentKey="CharacterName"
                 inherits="GambitCharacterSheetEditableFontStringTemplate">
                 <Size x="200" y="85" />
                 <Anchors>

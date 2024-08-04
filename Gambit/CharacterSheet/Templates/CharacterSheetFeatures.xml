@@ -1,0 +1,67 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+    <Frame name="GambitCharacterSheetFeaturesEntryTemplate" virtual="true"
+        mixin="GambitCharacterSheetFeaturesEntryMixin">
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString
+                    parentKey="FeatureName" justifyH="LEFT" text="$Feature Name$"
+                    font="ChatFontNormal">
+                    <Anchors>
+                        <Anchor point="LEFT" x="5" />
+                        <Anchor point="RIGHT" />
+                    </Anchors>
+                </FontString>
+                <Texture parentKey="Separator"
+                    atlas="header-horizontal-rule">
+                    <Size y="4" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT"
+                            relativeKey="$parent.FeatureName" x="-3" y="-2" />
+                        <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT"
+                            relativeKey="$parent.FeatureName" x="-6" y="-2" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="GambitCharacterSheetFeaturesTemplate" virtual="true"
+        mixin="GambitCharacterSheetFeaturesMixin">
+        <Frames>
+            <Frame parentKey="ScrollBox" inherits="WowScrollBoxList">
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="4" y="-4" />
+                    <Anchor point="BOTTOMLEFT" x="4" y="4" />
+                    <Anchor point="BOTTOMRIGHT" x="-6" y="4" relativeKey="$parent.ScrollBar"
+                        relativePoint="BOTTOMLEFT" />
+                </Anchors>
+            </Frame>
+            <EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="-7" y="-4" />
+                    <Anchor point="BOTTOMRIGHT" x="-7" y="7" />
+                </Anchors>
+            </EventFrame>
+            <Frame parentKey="NineSlice"
+                inherits="NineSlicePanelTemplate">
+                <KeyValues>
+                    <KeyValue key="layoutType" value="GambitThinGrayBorder" />
+                </KeyValues>
+            </Frame>
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture atlas="Professions-Recipe-Background-Blacksmithing">
+                    <TexCoords>
+                        <Rect ULx="0.37" ULy="0" LLx="0.37" LLy="1" />
+                    </TexCoords>
+                </Texture>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+    </Frame>
+</Ui>

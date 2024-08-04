@@ -1,4 +1,4 @@
-Gambit_Addon = LibStub("AceAddon-3.0"):NewAddon("Gambit", "AceConsole-3.0");
+Gambit_Addon = LibStub("AceAddon-3.0"):NewAddon("Gambit");
 Gambit_Addon.API = {};
 
 GambitAPI = Gambit_Addon.API;

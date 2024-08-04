@@ -12,12 +12,9 @@
 ## X-Website: https://kivatech.io
 
 Libs/LibStub/LibStub.lua
-Libs/CallbackHandler-1.0/CallbackHandler-1.0.xml
 Libs/AceAddon-3.0/AceAddon-3.0.xml
 Libs/AceLocale-3.0/AceLocale-3.0.xml
-Libs/AceConsole-3.0/AceConsole-3.0.xml
-Libs/AceEvent-3.0/AceEvent-3.0.xml
-Libs/AceSerializer-3.0/AceSerializer-3.0.xml
+Libs/AceDB-3.0/AceDB-3.0.xml
 Libs/TaintLess/TaintLess.xml
 Libs/Ellyb/Ellyb.xml
 Libs/LibChatAnims/LibChatAnims.xml
@@ -38,8 +35,7 @@ Core/Global.lua
 Core/Utils.lua
 Core/Events.lua
 Core/Enums.lua
-
-DB/DBMain.lua
+Core/Database.lua
 
 CharacterSheet/CharacterSheetNineSliceLayouts.lua
 CharacterSheet/CharacterSheetFrame.lua
@@ -48,6 +44,8 @@ CharacterSheet/Templates/CharacterSheetElements.xml
 CharacterSheet/Templates/CharacterSheetHeader.xml
 CharacterSheet/Templates/CharacterSheetSkills.xml
 CharacterSheet/Templates/CharacterSheetAttributes.xml
+CharacterSheet/Templates/CharacterSheetFeatures.xml
+CharacterSheet/Templates/CharacterSheetHealth.xml
 CharacterSheet/Templates/CharacterSheetFrame.xml
 
 Gambit.lua
